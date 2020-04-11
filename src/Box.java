@@ -33,8 +33,6 @@ public class Box {
     }
 
     //setters
-
-
     public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
