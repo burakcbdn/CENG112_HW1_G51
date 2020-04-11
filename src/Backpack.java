@@ -16,10 +16,18 @@ public class Backpack {
         setCapacity();
     }
 
-    public void addItem(Item item) {
-        items.add(item);
-        itemCount++;
-        currentWeight += item.getWeight();
+    public boolean addItem(Item item) {
+            if(currentWeight + item.getWeight() < capacity) {
+                currentWeight += item.getWeight();
+                items.add(item);
+                itemCount++;
+                return true;
+            }else {
+                return false;
+            }
+
+
+
     }
 
     public boolean isFull(){
@@ -42,12 +50,16 @@ public class Backpack {
         switch (difficultyLevel) {
             case 0:
                 this.capacity = 9;
+                break;
             case 1:
                 this.capacity = 7;
+                break;
             case 2:
                 this.capacity = 5;
+                break;
             case 3:
                 this.capacity = 3;
+                break;
         }
     }
 
