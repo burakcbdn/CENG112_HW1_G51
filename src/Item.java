@@ -10,10 +10,7 @@ public class Item {
         this.title = title;
     }
 
-    public double getItemValue() {
-        return  itemGain / weight;
-    }
-
+    //getters
     public double getItemGain() {
         return itemGain;
     }
@@ -24,6 +21,24 @@ public class Item {
 
     public double getWeight() {
         return weight;
+    }
+
+    //setters
+    public void setItemGain(double itemGain) {
+        this.itemGain = itemGain;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    //calculating value of item
+    public double calculateItemValue() {
+        return  itemGain / weight;
     }
 
 }

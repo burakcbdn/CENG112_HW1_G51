@@ -86,10 +86,10 @@ public class Main {
 
         System.out.println("Welcome to Survival Game!");
         System.out.println("*****************************************************************");
-        System.out.println(clothing.getMainLine());
-        System.out.println(foodAndDrink.getMainLine());
-        System.out.println(firstAid.getMainLine());
-        System.out.println(tool.getMainLine());
+        System.out.println(clothing.createMainLine());
+        System.out.println(foodAndDrink.createMainLine());
+        System.out.println(firstAid.createMainLine());
+        System.out.println(tool.createMainLine());
         System.out.println("*****************************************************************");
 
         Backpack backpack;
@@ -124,10 +124,10 @@ public class Main {
             }
 
             System.out.println("*****************************************************************");
-            System.out.println(clothing.getMainLine());
-            System.out.println(foodAndDrink.getMainLine());
-            System.out.println(firstAid.getMainLine());
-            System.out.println(tool.getMainLine());
+            System.out.println(clothing.createMainLine());
+            System.out.println(foodAndDrink.createMainLine());
+            System.out.println(firstAid.createMainLine());
+            System.out.println(tool.createMainLine());
             System.out.println("Backpack                    " + backpack.getItemCount() + " items    |  " + backpack.getCurrentWeight() + " kg");
             System.out.println("Lifespan                    " + backpack.calculateLifeSpan() + " days");
             System.out.println("*****************************************************************");
@@ -139,7 +139,7 @@ public class Main {
     //For calculating lifespan of items
     private static void calculateItemValues(Box box, Map<Item, Double> itemValues) {
         for (Item item : box.getItems()) {
-            itemValues.put(item, item.getItemValue());
+            itemValues.put(item, item.calculateItemValue());
         }
     }
 

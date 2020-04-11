@@ -7,9 +7,7 @@ public class Box {
 
     private String itemType;
     private int itemCount = 0;
-
     private double totalWeight = 0;
-
     private ArrayList<Item> items = new ArrayList<>();
 
     //Constructor
@@ -17,6 +15,43 @@ public class Box {
         this.itemType = itemType;
     }
 
+    //getters
+    public double getTotalWeight() {
+        return totalWeight;
+    }
+
+    public int getItemCount() {
+        return itemCount;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    //setters
+
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
+    }
+
+    public void setItemCount(int itemCount) {
+        this.itemCount = itemCount;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    public void setTotalWeight(double totalWeight) {
+        this.totalWeight = totalWeight;
+    }
+
+    //functions
     public void addItem(Item item) {
         itemCount++;
         totalWeight += item.getWeight();
@@ -34,6 +69,7 @@ public class Box {
         }
     }
 
+    //checkers
     public boolean isBoxEmpty() {
         return itemCount == 0;
     }
@@ -42,24 +78,8 @@ public class Box {
         return items.contains(item);
     }
 
-    public double getTotalWeight() {
-        return totalWeight;
-    }
-
-    public int getItemCount() {
-        return itemCount;
-    }
-
-    public ArrayList<Item> getItems() {
-        return items;
-    }
-
-    public String getItemType() {
-        return itemType;
-    }
-
-
-    public String getMainLine() {
+    //creating information line for display
+    public String createMainLine() {
         BigDecimal w = new BigDecimal(totalWeight);
         w = w.setScale(2, RoundingMode.HALF_EVEN);
 
@@ -74,10 +94,6 @@ public class Box {
                 return itemType + "                   " + itemCount + " items     |  " + we + " kg";
             case "Tool":
                 return itemType + "                        " + itemCount + " items     |  " + we + " kg";
-
-        }
-        return "";
-
+        } return "";
     }
-
 }
