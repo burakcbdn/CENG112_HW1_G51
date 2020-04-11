@@ -23,6 +23,15 @@ public class Box {
         items.add(item);
     }
 
+    public boolean removeItem(Item itemForRemove){
+        if (items.contains(itemForRemove)) {
+            items.remove(itemForRemove);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public double getTotalWeight() {
         return totalWeight;
     }

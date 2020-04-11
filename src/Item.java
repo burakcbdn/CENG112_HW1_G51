@@ -10,6 +10,10 @@ public class Item {
         this.title = title;
     }
 
+    public double getItemValue() {
+        return  itemGain / weight;
+    }
+
     public String getTitle() {
         return title;
     }

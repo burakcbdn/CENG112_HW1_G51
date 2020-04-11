@@ -1,18 +1,40 @@
-import java.lang.reflect.Array;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Backpack {
 
     private int difficultyLevel;
 
     private double capacity;
+    private double currentWeight;
+    private int itemCount;
+
+    private ArrayList<Item> items = new ArrayList<Item>();
 
 
     public Backpack(int difficultyLevel) {
         this.difficultyLevel = difficultyLevel;
+        setCapacity();
     }
 
-    public void setCapacity() {
+    public void addItem(Item item) {
+        items.add(item);
+        itemCount++;
+        currentWeight += item.getWeight();
+    }
+
+    public boolean isFull(){
+        return currentWeight >= capacity;
+    }
+
+    public int getItemCount() {
+        return itemCount;
+    }
+
+    public double getCapacity() {
+        return this.capacity;
+    }
+
+    private void setCapacity() {
         switch (difficultyLevel) {
             case 0:
                 this.capacity = 9;
@@ -25,7 +47,5 @@ public class Backpack {
         }
     }
 
-    public double getCapacity() {
-        return this.capacity;
-    }
+
 }
