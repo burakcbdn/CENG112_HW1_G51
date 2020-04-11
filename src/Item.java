@@ -14,6 +14,10 @@ public class Item {
         return  itemGain / weight;
     }
 
+    public double getItemGain() {
+        return itemGain;
+    }
+
     public String getTitle() {
         return title;
     }

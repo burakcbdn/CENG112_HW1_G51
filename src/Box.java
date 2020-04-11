@@ -1,5 +1,5 @@
-
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 
@@ -10,13 +10,12 @@ public class Box {
 
     private double totalWeight = 0;
 
-    private ArrayList<Item> items = new ArrayList<Item>();
+    private ArrayList<Item> items = new ArrayList<>();
 
     //Constructor
     public Box(String itemType) {
         this.itemType = itemType;
     }
-
 
     public void addItem(Item item) {
         itemCount++;
@@ -24,13 +23,11 @@ public class Box {
         items.add(item);
     }
 
-    public boolean removeItem(Item itemForRemove){
+    public boolean removeItem(Item itemForRemove) {
         if (items.contains(itemForRemove)) {
+            totalWeight -= itemForRemove.getWeight();
             items.remove(itemForRemove);
             itemCount--;
-            if ((itemForRemove.getWeight()) <= totalWeight) {
-                totalWeight-=itemForRemove.getWeight();
-            }
             return true;
         } else {
             return false;
@@ -38,11 +35,10 @@ public class Box {
     }
 
     public boolean isBoxEmpty() {
-
-        return  itemCount == 0;
+        return itemCount == 0;
     }
 
-    public boolean contains(Item item){
+    public boolean contains(Item item) {
         return items.contains(item);
     }
 
@@ -64,9 +60,8 @@ public class Box {
 
 
     public String getMainLine() {
-
         BigDecimal w = new BigDecimal(totalWeight);
-        w = w.setScale(2, BigDecimal.ROUND_HALF_UP);
+        w = w.setScale(2, RoundingMode.HALF_EVEN);
 
         double we = w.doubleValue();
 

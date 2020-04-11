@@ -42,6 +42,15 @@ public class Backpack {
         return this.capacity;
     }
 
+    public int calculateLifeSpan() {
+        int totalLifeSpan = 0;
+        for (Item item : items) {
+            totalLifeSpan += item.getItemGain();
+        }
+
+        return totalLifeSpan;
+    }
+
     public double getCurrentWeight() {
         return currentWeight;
     }
