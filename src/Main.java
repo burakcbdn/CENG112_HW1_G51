@@ -19,6 +19,13 @@ public class Main {
         Box firstAid = new Box("First Aid");
         Box tool = new Box("Tool");
 
+        ArrayList<Box> boxes = new ArrayList<>();
+        boxes.add(clothing);
+        boxes.add(foodAndDrink);
+        boxes.add(firstAid);
+        boxes.add(tool);
+
+
         try {
 
             BufferedReader reader = new BufferedReader(new FileReader("src/items.txt"));
@@ -85,9 +92,14 @@ public class Main {
 
         System.out.println("Select difficulty:");
 
+        boolean status = !clothing.isBoxEmpty() && !foodAndDrink.isBoxEmpty() && !firstAid.isBoxEmpty() && !tool.isBoxEmpty();
+
         Backpack backpack;
 
-        while (true) {
+
+        while (status) {
+
+
 
             System.out.println("[0] Pilgrim   [1] Voyager  [2] Stalker   [3] Interloper   [9] Exit");
 
@@ -101,25 +113,28 @@ public class Main {
                 Item mostValuableItem = sortedItemValues.keySet().iterator().next();
 
                 backpack.addItem(mostValuableItem);
+                System.out.println(backpack.getCurrentWeight());
                 sortedItemValues.remove(mostValuableItem);
 
-
-
+                useItem(mostValuableItem, boxes);
 
             }
-
-
 
             if (option == 9) {
                 break;
             }
+
+
 
             System.out.println("*****************************************************************");
             System.out.println(clothing.getMainLine());
             System.out.println(foodAndDrink.getMainLine());
             System.out.println(firstAid.getMainLine());
             System.out.println(tool.getMainLine());
+            System.out.println(backpack.getCurrentWeight());
             System.out.println("*****************************************************************");
+
+            status = !clothing.isBoxEmpty() && !foodAndDrink.isBoxEmpty() && !firstAid.isBoxEmpty() && !tool.isBoxEmpty();
         }
 
 
@@ -152,6 +167,14 @@ public class Main {
             temp.put(aa.getKey(), aa.getValue());
         }
         return temp;
+    }
+
+    public static void useItem(Item item, ArrayList<Box> boxes) {
+        for (Box box : boxes) {
+            if (box.contains(item)){
+                box.removeItem(item);
+            }
+        }
     }
 
 

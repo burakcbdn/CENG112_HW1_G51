@@ -1,4 +1,5 @@
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 
@@ -26,10 +27,23 @@ public class Box {
     public boolean removeItem(Item itemForRemove){
         if (items.contains(itemForRemove)) {
             items.remove(itemForRemove);
+            itemCount--;
+            if ((itemForRemove.getWeight()) <= totalWeight) {
+                totalWeight-=itemForRemove.getWeight();
+            }
             return true;
         } else {
             return false;
         }
+    }
+
+    public boolean isBoxEmpty() {
+
+        return  itemCount == 0;
+    }
+
+    public boolean contains(Item item){
+        return items.contains(item);
     }
 
     public double getTotalWeight() {
@@ -48,21 +62,23 @@ public class Box {
         return itemType;
     }
 
-    public boolean isEmpty() {
-        return itemCount == 0;
-    }
 
     public String getMainLine() {
 
+        BigDecimal w = new BigDecimal(totalWeight);
+        w = w.setScale(2, BigDecimal.ROUND_HALF_UP);
+
+        double we = w.doubleValue();
+
         switch (itemType) {
             case "Clothing":
-                return itemType + "                    " + itemCount + " items    |  " + totalWeight + " kg";
+                return itemType + "                    " + itemCount + " items    |  " + we + " kg";
             case "Food And Drink":
-                return itemType + "              " + itemCount + " items     |  " + totalWeight + " kg";
+                return itemType + "              " + itemCount + " items     |  " + we + " kg";
             case "First Aid":
-                return itemType + "                   " + itemCount + " items     |  " + totalWeight + " kg";
+                return itemType + "                   " + itemCount + " items     |  " + we + " kg";
             case "Tool":
-                return itemType + "                        " + itemCount + " items     |  " + totalWeight + " kg";
+                return itemType + "                        " + itemCount + " items     |  " + we + " kg";
 
         }
         return "";

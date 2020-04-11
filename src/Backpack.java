@@ -34,6 +34,10 @@ public class Backpack {
         return this.capacity;
     }
 
+    public double getCurrentWeight() {
+        return currentWeight;
+    }
+
     private void setCapacity() {
         switch (difficultyLevel) {
             case 0:
