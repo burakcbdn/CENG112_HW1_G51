@@ -102,6 +102,14 @@ public class Main {
 
             int option = scanner.nextInt();
 
+            Integer[] optionsList = {0,1,2,3,9};
+            List<Integer> options = Arrays.asList(optionsList);
+
+            if (!options.contains(option)) {
+                System.out.println("Please select again!");
+                continue;
+            }
+
             backpack = new Backpack(option);
 
             while (true) {
@@ -136,6 +144,7 @@ public class Main {
         }
         System.out.println("No items left in the boxes");
     }
+
     //For calculating lifespan of items
     private static void calculateItemValues(Box box, Map<Item, Double> itemValues) {
         for (Item item : box.getItems()) {
@@ -151,3 +160,4 @@ public class Main {
         }
     }
 }
+
