@@ -13,6 +13,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
+        //Creating item boxes by type.
         Box clothing = new Box("Clothing");
         Box foodAndDrink = new Box("Food And Drink");
         Box firstAid = new Box("First Aid");
@@ -24,6 +25,7 @@ public class Main {
         boxes.add(firstAid);
         boxes.add(tool);
 
+        //reading items from file
         try {
 
             BufferedReader reader = new BufferedReader(new FileReader("src/items.txt"));
@@ -68,6 +70,8 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        //creating hashmap for items and their values
 
         HashMap<Item, Double> itemValues = new HashMap<>();
 
@@ -95,13 +99,17 @@ public class Main {
         System.out.println("*****************************************************************");
 
         Backpack backpack;
+        
+        //Main loop
 
         boolean status = true;
         while (status) {
         	try {
         		System.out.println("Select difficulty:");
                 System.out.println("[0] Pilgrim   [1] Voyager  [2] Stalker   [3] Interloper   [9] Exit");
-
+                
+                
+                //Taking input from user.
                 int option = scanner.nextInt();
 
                 Integer[] optionsList = {0,1,2,3,9};
@@ -111,8 +119,15 @@ public class Main {
                     System.out.println("Please select again!");
                     continue;
                 }
+                
+                if (option == 9) {
+                    break;
+                }
+
 
                 backpack = new Backpack(option);
+                
+                //Filling the backpack with most valuable items.
 
                 while (true) {
                     try {
@@ -129,10 +144,7 @@ public class Main {
                     }
                 }
 
-                if (option == 9) {
-                    break;
-                }
-
+                
                 System.out.println("*****************************************************************");
                 System.out.println(clothing.createMainLine());
                 System.out.println(foodAndDrink.createMainLine());
@@ -141,10 +153,11 @@ public class Main {
                 System.out.println("Backpack                    " + backpack.getItemCount() + " items    |  " + backpack.getCurrentWeight() + " kg");
                 System.out.println("Lifespan                    " + backpack.calculateLifeSpan() + " days");
                 System.out.println("*****************************************************************");
-
+                
+                //Checking all the boxes if they are empty.
                 status = !clothing.isBoxEmpty() || !foodAndDrink.isBoxEmpty() || !firstAid.isBoxEmpty() || !tool.isBoxEmpty();
         		
-        		
+        	//Handling InputMismatchException.
         	}catch (InputMismatchException e) {
         		System.out.println("You entered invalip ınput. Please try again!");
         		scanner.next();
@@ -156,13 +169,14 @@ public class Main {
         scanner.close();
     }
 
-    //For calculating lifespan of items
+    //calculating value of items
     private static void calculateItemValues(Box box, Map<Item, Double> itemValues) {
         for (Item item : box.getItems()) {
             itemValues.put(item, item.calculateItemValue());
         }
     }
-
+    
+    //Adding items to backpack
     private static void useItem(Item item, ArrayList<Box> boxes) {
         for (Box box : boxes) {
             if (box.contains(item)) {
@@ -171,4 +185,3 @@ public class Main {
         }
     }
 }
-
