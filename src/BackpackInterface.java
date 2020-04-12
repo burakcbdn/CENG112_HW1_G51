@@ -1,3 +1,5 @@
+//Backpack interface for implementing backpack
+
 import java.util.ArrayList;
 
 public interface BackpackInterface<T> {
