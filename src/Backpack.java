@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Backpack {
+public class Backpack implements BackpackInterface<Item> {
 
     private int difficultyLevel;
     private double capacity;
@@ -16,18 +16,19 @@ public class Backpack {
     }
 
     //getters
+    @Override
     public double getCapacity() {
         return this.capacity;
     }
-
+    @Override
     public int getItemCount() {
         return itemCount;
     }
-
+    @Override
     public double getCurrentWeight() {
         return currentWeight;
     }
-
+    @Override
     public ArrayList<Item> getItems() {
         return items;
     }
@@ -37,6 +38,7 @@ public class Backpack {
     }
 
     //setters
+    @Override
     public void setCapacity() {
         switch (difficultyLevel) {
             case 0:
@@ -54,6 +56,7 @@ public class Backpack {
         }
     }
 
+    @Override
     public void setCurrentWeight(double currentWeight) {
         this.currentWeight = currentWeight;
     }
@@ -62,15 +65,17 @@ public class Backpack {
         this.difficultyLevel = difficultyLevel;
     }
 
+    @Override
     public void setItemCount(int itemCount) {
         this.itemCount = itemCount;
     }
-
+    @Override
     public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
 
     //functions
+    @Override
     public boolean addItem(Item item) {
         if (currentWeight + item.getWeight() < capacity) {
             currentWeight += item.getWeight();
@@ -91,6 +96,7 @@ public class Backpack {
     }
 
     //checkers
+    @Override
     public boolean isFull() {
         return currentWeight >= capacity;
     }
