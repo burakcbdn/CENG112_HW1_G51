@@ -60,8 +60,10 @@ public class Main {
                 }
 
                 line = reader.readLine();
+                
 
             }
+            reader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -96,53 +98,62 @@ public class Main {
 
         boolean status = true;
         while (status) {
+        	try {
+        		System.out.println("Select difficulty:");
+                System.out.println("[0] Pilgrim   [1] Voyager  [2] Stalker   [3] Interloper   [9] Exit");
 
-            System.out.println("Select difficulty:");
-            System.out.println("[0] Pilgrim   [1] Voyager  [2] Stalker   [3] Interloper   [9] Exit");
+                int option = scanner.nextInt();
 
-            int option = scanner.nextInt();
+                Integer[] optionsList = {0,1,2,3,9};
+                List<Integer> options = Arrays.asList(optionsList);
 
-            Integer[] optionsList = {0,1,2,3,9};
-            List<Integer> options = Arrays.asList(optionsList);
+                if (!options.contains(option)) {
+                    System.out.println("Please select again!");
+                    continue;
+                }
 
-            if (!options.contains(option)) {
-                System.out.println("Please select again!");
-                continue;
-            }
+                backpack = new Backpack(option);
 
-            backpack = new Backpack(option);
+                while (true) {
+                    try {
+                        Item mostValuableItem = sortedItemValues.keySet().iterator().next();
 
-            while (true) {
-                try {
-                    Item mostValuableItem = sortedItemValues.keySet().iterator().next();
-
-                    if (backpack.addItem(mostValuableItem)) {
-                        sortedItemValues.remove(mostValuableItem);
-                        useItem(mostValuableItem, boxes);
-                    } else {
+                        if (backpack.addItem(mostValuableItem)) {
+                            sortedItemValues.remove(mostValuableItem);
+                            useItem(mostValuableItem, boxes);
+                        } else {
+                            break;
+                        }
+                    } catch (NoSuchElementException e) {
                         break;
                     }
-                } catch (NoSuchElementException e) {
+                }
+
+                if (option == 9) {
                     break;
                 }
-            }
 
-            if (option == 9) {
-                break;
-            }
+                System.out.println("*****************************************************************");
+                System.out.println(clothing.createMainLine());
+                System.out.println(foodAndDrink.createMainLine());
+                System.out.println(firstAid.createMainLine());
+                System.out.println(tool.createMainLine());
+                System.out.println("Backpack                    " + backpack.getItemCount() + " items    |  " + backpack.getCurrentWeight() + " kg");
+                System.out.println("Lifespan                    " + backpack.calculateLifeSpan() + " days");
+                System.out.println("*****************************************************************");
 
-            System.out.println("*****************************************************************");
-            System.out.println(clothing.createMainLine());
-            System.out.println(foodAndDrink.createMainLine());
-            System.out.println(firstAid.createMainLine());
-            System.out.println(tool.createMainLine());
-            System.out.println("Backpack                    " + backpack.getItemCount() + " items    |  " + backpack.getCurrentWeight() + " kg");
-            System.out.println("Lifespan                    " + backpack.calculateLifeSpan() + " days");
-            System.out.println("*****************************************************************");
+                status = !clothing.isBoxEmpty() || !foodAndDrink.isBoxEmpty() || !firstAid.isBoxEmpty() || !tool.isBoxEmpty();
+        		
+        		
+        	}catch (InputMismatchException e) {
+        		System.out.println("You entered invalip ınput. Please try again!");
+        		scanner.next();
+        	}
 
-            status = !clothing.isBoxEmpty() || !foodAndDrink.isBoxEmpty() || !firstAid.isBoxEmpty() || !tool.isBoxEmpty();
+            
         }
         System.out.println("No items left in the boxes");
+        scanner.close();
     }
 
     //For calculating lifespan of items
