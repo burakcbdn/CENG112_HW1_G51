@@ -1,3 +1,5 @@
+//Box interface for implementing box
+
 import java.util.ArrayList;
 
 public interface BoxInterface<T> {
